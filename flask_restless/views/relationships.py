@@ -175,11 +175,7 @@ class RelationshipAPI(APIBase):
                     related_value.append(new_value)
                 except self.validation_exceptions as exception:
                     return self._handle_validation_exception(exception)
-        # TODO do we need to commit the session here?
-        #
-        #     self.session.commit()
-        #
-        # Perform any necessary postprocessing.
+            self.session.commit()
         for postprocessor in self.postprocessors['POST_RELATIONSHIP']:
             postprocessor()
         return {}, 204
